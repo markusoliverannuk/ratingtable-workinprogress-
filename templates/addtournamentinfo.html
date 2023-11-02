@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/static/addtournamentinfopagestyle.css">
+</head>
+
+<body>
+    
+<header>
+    <img src="/static/eltl.png" alt="" id="headerimg">
+    <a href="/reiting">Reiting</a>
+</header>
+    <div class="mainbody">
+        
+ <main class="table">
+    <section class="table_header">
+      
+        <section class="triplewindowgroup" id="filterwindow">
+            <h1></h1>
+            <form action="/addtournamentaction" method="POST" class="filter">
+                <section class="filterfirstcolumn">
+                <div class="filterOption" id="searchByName">
+                <label for="name">Võistluse nimi:</label>
+                <input type="text" id="name" name="tournamentname" placeholder="Võistluse nimi" required>
+                </div>
+                <div class="filterOption" id="searchByClub">
+                <label for="club">Peakohtunik:</label>
+                <input type="text" id="club" name="mainjudgename" placeholder="Peakohtunik" required>
+                </div>
+                <div class="filterOption" id="searchByClub">
+                    <button type="submit" id="addTournamentButton"> Lisa võistlus</button>
+                    </div>
+                
+               
+            </section>
+            <section class="filtersecondcolumn">
+                <div class="filterOption" id="searchByClub">
+                    <label for="club">Toimumise kuupäev:</label>
+                    <input type="text" id="club" name="datewhenhappened" placeholder="Kuupäev" required>
+                    </div>
+                    <div class="filterOption" id="filterByRating">
+                        <label for="playeramount">Mängijate arv:</label>
+                        <input type="text" name="playeramount" placeholder="Mängijate Arv" required>
+                    </div>
+              
+                </form>
+            </section>
+     
+                
+           
+        </section>  
+        <section class="triplewindowgroup" id="filterwindow2">
+            <section class="AddingGameInformation">
+                
+                <div class="typographicInfo">
+                    <h2>Mängude lisamine</h2><br>
+                    <p>Enne mängutulemuste lisamist tuleb vasakpoolses aknas täita võistluse info vorm.</p>
+                    <p>Lisamisel sisesta iga mäng eraldi. Mängu tulemuse kirjapilt peab vastama formaadile "Mängija A (seis) Mängija B".</p>
+                    <p>Peale iga mängu tulemuse sisestamist vajuta nuppu <b>"Sisesta mäng"</b>.</p>
+                </div>
+                
+                <div class="addGame">
+                    <form action="/insertgameinfo" method="POST" class="insertgameinfo">
+                        
+                            <div class="gameInfoInput" id="searchByName">
+                                
+                                <input type="text" id="name" name="winnerplayer" placeholder="Võitja ID">
+                            </div>
+                            <div class="gameInfoInput" id="searchByName">
+                                
+                                <input type="text" id="name" name="score" placeholder="Lõppseis">
+                            </div>
+                            <div class="gameInfoInput" id="searchByName">
+                                
+                                <input type="text" id="name" name="loserplayer" placeholder="Kaotaja ID">
+                            </div>
+                        
+                    
+                    
+                </div>
+               <section class="submitGameBtnSection">
+                <button type="submit" id="submitGameInfoButton">Sisesta mäng</button>
+                </section>
+            </form>
+            
+            </section>
+        </section>     
+                
+        
+                
+            
+       
+        
+    </section>
+    <div class="submittournamentbuttonsection">
+   
+    </div>
+
+    <section class="pealkiri">
+        <h3>VIIMATI LISATUD VÕISTLUSED</h3>
+    </section>
+    <section class="table_body">
+        <table>
+            <thead>
+               
+                <tr>
+                    <th>Lisamise aeg</th>
+                    <th>Võistluse nimi</th>
+                    <th>Toimumise kuupäev</th>
+                    <th>Mängijate arv</th>
+                    <th>Peakohtunik</th>
+                 
+                </tr>
+            </thead>
+            <tbody>
+                
+                {{ range .Tournaments }}
+                    <tr>
+                        <td>{{ .AddedWhen }}</td>
+                        <td>{{ .Name }}</td>
+                        <td>{{ .HappenedWhen }}</td>
+                        <td>{{ .AmountOfPlayers }}</td>
+                        <td>{{ .MainJudge }}</td>
+                    </tr>
+                    
+                {{ end }}
+               
+            </tbody>
+        </table>
+    </section>       <!--<section class="filtersecondrow">
+        <div class="filterOptionLeft" id="searchByName">
+        <label for="name">Sünniaasta järgi:</label>
+        <input type="text" id="name" name="name" placeholder="Kõik">
+        </div>
+        <div class="filterOptionRight" id="searchByClub">
+        <label for="club">Lähtesta M/N:</label>
+        <input type="text" id="club" name="club" placeholder="Mehed">
+        </div>
+    </section>-->
+    
+    <!--<section class="filterfourthrow">
+        <button type="submit" id="filterButton">Filtreeri</button>
+    </section>-->
+        <!--<div class="filterOption" id="searchByBirthYear">
+        <label for="yearOfBirth">Otsi sünniaasta järgi:</label>
+        <input type="text" id="yearOfBirth" name="yearOfBirth" placeholder="Sünniaasta">
+        </div>-->
+   
+ </main>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+</head>
+<body>
+</body>
+</html>
+
+</body>
+</html>

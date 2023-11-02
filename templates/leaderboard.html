@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/leaderboardpagestyle.css">
+    <script>
+        const playerName = document.querySelector('.selectedPlayerInfo h1');
+        const ratingPoints = document.querySelector('.selectedPlayerInfo h2:nth-child(2)');
+        const ratingPlace = document.querySelector('.selectedPlayerInfo h2:nth-child(3)');
+
+        const tableRows = document.querySelectorAll('table tbody tr');
+
+        tableRows.forEach(row => {
+            const firstName = row.querySelector('td:nth-child(5)').textContent;
+
+            row.querySelector('td:nth-child(5)').addEventListener('click', () => {
+                
+                const playerData = {
+                    name: firstName, 
+                    points: row.querySelector('td:nth-child(2)').textContent,
+                    place: row.querySelector('td:nth-child(1)').textContent,
+                };
+
+                playerName.textContent = playerData.name;
+                ratingPoints.textContent = `Reitingupunkte: ${playerData.points}`;
+                ratingPlace.textContent = `Reitingu asetus: ${playerData.place}`;
+            });
+        });
+    </script>
+</head>
+<body>
+   <header>
+<img src="/static/eltl.png" alt="" id="headerimg">
+<a href="/addtournament">Addturna</a>
+</header>
+    <div class="mainbody">
+        
+ <main class="table">
+    <section class="table_header">
+      
+        <section class="triplewindowgroup" id="filterwindow">
+            <form action="/filter" method="GET" class="filter">
+                <section class="filterfirstcolumn">
+                <div class="filterOption" id="searchByName">
+                <label for="name">Mängija nimi:</label>
+                <input type="text" id="name" name="name" placeholder="Mängija nimi">
+                </div>
+                <div class="filterOption" id="searchByClub">
+                <label for="club">Klubi nimi:</label>
+                <input type="text" id="club" name="club" placeholder="Klubi nimi">
+                </div>
+                <div class="filterOption" id="searchByClub">
+                    <label for="club">Filtreeri mehed/naised:</label>
+                    <input type="text" id="club" name="club" placeholder="Klubi nimi">
+                    </div>
+            </section>
+            <section class="filtersecondcolumn">
+                <div class="filterOption" id="filterByRating">
+                    <label for="ratingRange">Vali reitingu vahemik:</label>
+                    <select id="ratingRange" name="ratingRange">
+                        <option value="all">Kõik</option>
+                        <option value="000100">0-100</option>
+                        <option value="101200">101-200</option>
+                        <option value="201300">201-300</option>
+                        <option value="301400">301-400</option>
+                        <option value="401500">401-500</option>
+                        <option value="501600">501-600</option>
+                        <option value="601700">601-700</option>
+                    </select>
+                </div>
+                <div class="filterOption" id="searchByClub">
+                <label for="club">Mängija sünniaasta:</label>
+                <input type="text" id="club" name="birthyear" placeholder="Sünniaasta">
+                </div>
+                <div class="filterOption" id="searchByClub">
+                    <button type="submit" id="filterButton">Filtreeri</button>
+                    </div>
+            </section>
+     
+                
+           </form>
+        </section>  
+        <section class="triplewindowgroup" id="filterwindow2">
+        <section class="selectedPlayerInfo">
+            <section class="typographicAndPieChartInfo">
+                <div class="typographicInfo">
+                <h1>Mart Vaarpu</h1>
+                <h2>Reitingupunkte: 28</h2>
+                <h2>Reitingu asetus: 150</h2>
+                </div>
+                <div class="pieChartInfo">
+                    <img src="/static/graphimg.png" alt="">
+                </div>
+            </section>
+            <section id="playerRatingGraph">
+            </section>
+        
+        
+        </section>
+        </section>     
+                
+        
+                
+            
+       
+        
+    </section>
+    <section class="table_body">
+        <table>
+            <thead>
+               
+                <tr>
+                    <th>NR</th>
+                    <th>PP</th>
+                    <th>RP</th>
+                    <th>KL</th>
+                    <th>ID</th>
+                    <th>EESNIMI</th>
+                    <th>PERENIMI</th>
+                    <th>SA</th>
+                    <th>KLUBI</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                {{ range .Players }}
+                    <tr>
+                        <td>{{ .RateOrder }}</td>
+                        <td>{{ .RatePlpnts }}</td>
+                        <td>{{ .RatePoints }}</td>
+                        <td>{{ .RateWeight }}</td>
+                        <td>{{ .PersonID }}</td>
+                        <td>{{ .FirstName }}</td>
+                        <td><bold>{{ .FamName }}</bold></td>
+                        <td>{{ .BirthDate }}</td>
+                        <td>{{ .ClbName }}</td>
+                    </tr>
+                    
+                {{ end }}
+            </tbody>
+        </table>
+    </section>       <!--<section class="filtersecondrow">
+        <div class="filterOptionLeft" id="searchByName">
+        <label for="name">Sünniaasta järgi:</label>
+        <input type="text" id="name" name="name" placeholder="Kõik">
+        </div>
+        <div class="filterOptionRight" id="searchByClub">
+        <label for="club">Lähtesta M/N:</label>
+        <input type="text" id="club" name="club" placeholder="Mehed">
+        </div>
+    </section>-->
+    
+    <!--<section class="filterfourthrow">
+        <button type="submit" id="filterButton">Filtreeri</button>
+    </section>-->
+        <!--<div class="filterOption" id="searchByBirthYear">
+        <label for="yearOfBirth">Otsi sünniaasta järgi:</label>
+        <input type="text" id="yearOfBirth" name="yearOfBirth" placeholder="Sünniaasta">
+        </div>-->
+   
+ </main>
+</div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+</head>
+<body>
+</body>
+</html>
+
+</body>
+</html>
